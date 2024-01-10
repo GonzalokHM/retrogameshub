@@ -13,7 +13,7 @@ function NavBar() {
 
   return (
     <>
-      <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+      <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)} type="button">
         ☰
       </button>
       <nav id="nav" className={menuOpen ? 'open' : ''}>
@@ -25,12 +25,12 @@ function NavBar() {
           </li>
           <li className={`link ${isActive('/Tic-Tac-Toe') ? 'active' : ''}`}>
             <Link to="/Tic-Tac-Toe" onClick={closeMenu}>
-              City Weather
+              Tic-Tac-Toe
             </Link>
           </li>
           <li className={`link ${isActive('/Hangman') ? 'active' : ''}`}>
             <Link to="/Hangman" onClick={closeMenu}>
-              Local Forecast
+              Hangman
             </Link>
           </li>
         </ul>

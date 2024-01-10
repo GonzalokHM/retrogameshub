@@ -1,3 +1,4 @@
+import './TicTacToe.css';
 import { useState, useEffect } from 'react';
 
 function TicTacToe() {
@@ -6,24 +7,20 @@ function TicTacToe() {
   const [board, setBoard] = useState(Array(3).fill(Array(3).fill(null)));
   const [winner, setWinner] = useState(null);
 
-  useEffect(() => {
-    // Aquí irá la lógica para comprobar si hay un ganador
-  }, [board]);
-
   const startGame = () => {
     setIsStarted(true);
+  };
+
+  const endGame = () => {
+    setIsStarted(false);
     setBoard(Array(3).fill(Array(3).fill(null)));
     setPlayer('X');
     setWinner(null);
   };
 
-  const endGame = () => {
-    setIsStarted(false);
-  };
-
   const handleCellClick = (row, col) => {
     if (!isStarted || board[row][col] || winner) return;
-    
+
     // Actualizar el tablero con el símbolo del jugador actual
     const newBoard = [...board];
     newBoard[row] = [...newBoard[row]];
@@ -34,19 +31,67 @@ function TicTacToe() {
     setPlayer(player === 'X' ? 'O' : 'X');
   };
 
-  const checkWinner = () => {
-    // Lógica para comprobar el ganador
-  };
+  useEffect(() => {
+    const checkWinner = () => {
+      // Comprobar filas, columnas y diagonales
+      for (let i = 0; i < 3; i += 1) {
+        if (board[i][0] && board[i][0] === board[i][1] && board[i][0] === board[i][2]) {
+          setWinner(board[i][0]);
+          return;
+        }
+
+        if (board[0][i] && board[0][i] === board[1][i] && board[0][i] === board[2][i]) {
+          setWinner(board[0][i]);
+          return;
+        }
+      }
+
+      if (board[0][0] && board[0][0] === board[1][1] && board[0][0] === board[2][2]) {
+        setWinner(board[0][0]);
+        return;
+      }
+
+      if (board[0][2] && board[0][2] === board[1][1] && board[0][2] === board[2][0]) {
+        setWinner(board[0][2]);
+        return;
+      }
+
+      // Comprobar empate
+      if (board.every((row) => row.every((cell) => cell))) {
+        setWinner('Empate');
+      }
+    };
+
+    checkWinner();
+  }, [board]);
 
   return (
-    <div>
-      <button onClick={isStarted ? endGame : startGame}>
-        {isStarted ? 'Terminar Partida' : 'Comenzar Partida'}
+    <div id="TTTContainer">
+      <button onClick={isStarted ? endGame : startGame} type="button" className="game-button">
+        {isStarted ? 'End Game' : 'Start Game'}
       </button>
-      <div>Turno de: {player}</div>
+      <div className="turn">Player's Turn: {player}</div>
       <div>
-        {/* Aquí renderizaremos el tablero */}
+        {board.map((row, rowIndex) => (
+          <div key={rowIndex} style={{ display: 'flex', justifyContent: 'center' }}>
+            {row.map((cell, colIndex) => (
+              <button
+                key={`${rowIndex}-${colIndex}`}
+                onClick={() => handleCellClick(rowIndex, colIndex)}
+                style={{ width: '50px', height: '50px', margin: '5px' }}
+                type="button"
+              >
+                {cell}
+              </button>
+            ))}
+          </div>
+        ))}
       </div>
+      {winner && (
+        <div className="winner">
+          <p>Winner: {winner}</p>
+        </div>
+      )}
     </div>
   );
 }
