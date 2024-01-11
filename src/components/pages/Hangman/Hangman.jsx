@@ -1,6 +1,7 @@
-import './Hangman.css';
-
 import { useState, useEffect, useRef } from 'react';
+import hangmanBackground from '../../../assets/hangmanBackground.jpg';
+import hangmanMusic from '../../../assets/hangmanMusic.mp3';
+import './Hangman.css';
 
 const words = [
   'apple',
@@ -29,6 +30,47 @@ function Hangman() {
   const [gameStarted, setGameStarted] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [gameWon, setGameWon] = useState(false);
+
+  const [isMuted, setIsMuted] = useState(false);
+  const musicRef = useRef(new Audio(hangmanMusic));
+
+  useEffect(() => {
+    // Configurar música
+    const music = musicRef.current;
+    music.loop = true;
+    music.play();
+
+    return () => {
+      // Limpiar al desmontar
+      music.pause();
+    };
+  }, []);
+
+  useEffect(() => {
+    // Controlar silencio
+    const music = musicRef.current;
+    if (isMuted) {
+      music.pause();
+    } else {
+      music.play();
+    }
+  }, [isMuted]);
+
+  const toggleMute = () => {
+    setIsMuted(!isMuted);
+  };
+
+  useEffect(() => {
+    // Establecer fondo
+    document.body.style.backgroundImage = `url(${hangmanBackground})`;
+    document.body.style.backgroundSize = 'cover';
+    document.body.style.backgroundPosition = 'center';
+
+    return () => {
+      // Limpiar al desmontar
+      document.body.style.backgroundImage = '';
+    };
+  }, []);
 
   useEffect(() => {
     if (gameStarted) {
@@ -151,17 +193,26 @@ function Hangman() {
   }, [remainingAttempts]);
 
   return (
-    <div>
-      <button onClick={startGame} type="button">
+    <div className="hangman-container">
+      <button className="hangman-start" onClick={startGame} type="button">
         Start Game
       </button>
-      {gameStarted && <div>Palabra: {renderWord()}</div>}
-      {gameStarted && <div>Letras Erróneas: {wrongLetters.join(', ')}</div>}
-      {gameStarted && <div>Vidas Restantes: {remainingAttempts}</div>}
-      {gameStarted && <div>{renderAlphabetButtons()}</div>}
-      {gameOver && <div>{gameWon ? '¡you win!' : 'Game Over'}</div>}
-      <div>
+      {gameStarted && <div id="word">Word: {renderWord()}</div>}
+      {gameOver && <div className="hangman-end">{gameWon ? '¡you win!' : 'Game Over'}</div>}
+      <div className="hangman-error">
         <canvas ref={canvasRef} width="150" height="150" />
+        <div className="error-info">
+          {gameStarted && (
+            <div className="error-letters">Wrong Leters: {wrongLetters.join(', ')}</div>
+          )}
+          {gameStarted && <div className="hangman-lives">Lives: {remainingAttempts}</div>}
+        </div>
+      </div>
+      {gameStarted && <div className="alphabet">{renderAlphabetButtons()}</div>}
+      <div>
+        <button className="togle-music" onClick={toggleMute} type="button">
+          {isMuted ? 'Unmute' : 'Mute'}
+        </button>
       </div>
     </div>
   );
