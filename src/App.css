@@ -1,11 +1,13 @@
 #root {
+  --LinK-0: coral;
   --LinK-hover:#d9fa00;
+  --LinK-active:#26f9fe;
   --background-color-shadow: rgba(255, 255, 255, 0.14);
   --box-shadow: rgba(0, 0, 0, 0.2);
   --border-color-shadow: rgba(255, 255, 255, 0.12);
 
 
-  display: flex;
+  display: flex; 
   flex-direction: column;
   justify-content: center; 
   align-items: center;
@@ -50,6 +52,9 @@
 
 .link {
   padding: 10px 20px;
+  background-color: black;
+  border: 1px solid #ffea00;
+  border-radius: 15px;
 }
 
 .link a {
@@ -71,6 +76,14 @@
 @media screen and (max-width: 530px) {
   .hamburger {
     display: block;
+    font-size: 30px;
+    color: #26f9fe;;
+    background: rgb(0 0 0 / 59%);;
+    box-shadow: 0 4px 30px var(--box-shadow);
+    backdrop-filter: blur(5px);
+    border: 1px solid var(--border-color-shadow);
+    cursor: pointer;
+    border-radius: 20px;
   }
 
   #nav {
@@ -93,7 +106,7 @@
   }
 
   #nav ul li {
-    margin-bottom: 10px;
+    margin-bottom: 3px;
   }
   .link{
     padding: 0;

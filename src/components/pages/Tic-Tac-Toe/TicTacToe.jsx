@@ -1,11 +1,24 @@
-import './TicTacToe.css';
 import { useState, useEffect } from 'react';
+import ticTacToeBackground from '../../../assets/ticTacToeBackground.png';
+import './TicTacToe.css';
 
 function TicTacToe() {
   const [isStarted, setIsStarted] = useState(false);
   const [player, setPlayer] = useState('X');
   const [board, setBoard] = useState(Array(3).fill(Array(3).fill(null)));
   const [winner, setWinner] = useState(null);
+
+  useEffect(() => {
+    // Establecer fondo
+    document.body.style.backgroundImage = `url(${ticTacToeBackground})`;
+    document.body.style.backgroundSize = 'cover';
+    document.body.style.backgroundPosition = 'center';
+
+    return () => {
+      // Limpiar al desmontar
+      document.body.style.backgroundImage = '';
+    };
+  }, []);
 
   const startGame = () => {
     setIsStarted(true);
@@ -70,8 +83,10 @@ function TicTacToe() {
       <button onClick={isStarted ? endGame : startGame} type="button" className="game-button">
         {isStarted ? 'End Game' : 'Start Game'}
       </button>
-      <div className="turn">Player's Turn: {player}</div>
-      <div>
+      <div className="turn">
+        <h3>Player's Turn: {player}</h3>
+      </div>
+      <div className="board">
         {board.map((row, rowIndex) => (
           <div key={rowIndex} style={{ display: 'flex', justifyContent: 'center' }}>
             {row.map((cell, colIndex) => (

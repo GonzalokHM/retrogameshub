@@ -11,7 +11,7 @@ const words = [
   'berry',
   'car',
   'mouse',
-  'honeydew',
+  'honey',
   'kiwi',
   'house',
   'mango',
@@ -131,64 +131,66 @@ function Hangman() {
   const canvasRef = useRef(null);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    const context = canvas.getContext('2d');
-    context.clearRect(0, 0, canvas.width, canvas.height); // Limpiar el canvas
+    if (canvasRef.current) {
+      const canvas = canvasRef.current;
+      const context = canvas.getContext('2d');
+      context.clearRect(0, 0, canvas.width, canvas.height); // Limpiar el canvas
 
-    // Dibujar base (siempre visible)
-    context.beginPath();
-    context.moveTo(10, 130);
-    context.lineTo(140, 130);
-    context.stroke();
-
-    if (remainingAttempts <= 5) {
-      // Dibujar poste
+      // Dibujar base (siempre visible)
       context.beginPath();
-      context.moveTo(75, 130);
-      context.lineTo(75, 10);
-      context.lineTo(125, 10);
-      context.lineTo(125, 20);
-      context.stroke();
-    }
-    if (remainingAttempts <= 4) {
-      // Dibujar cabeza
-      context.beginPath();
-      context.arc(125, 30, 10, 0, Math.PI * 2, true);
-      context.stroke();
-    }
-    if (remainingAttempts <= 3) {
-      // Dibujar cuerpo
-      context.beginPath();
-      context.moveTo(125, 40);
-      context.lineTo(125, 80);
-      context.stroke();
-    }
-    if (remainingAttempts <= 2) {
-      // Dibujar brazo izquierdo
-      context.beginPath();
-      context.moveTo(125, 50);
-      context.lineTo(110, 60);
-      context.stroke();
-    }
-    if (remainingAttempts <= 1) {
-      // Dibujar brazo derecho
-      context.beginPath();
-      context.moveTo(125, 50);
-      context.lineTo(140, 60);
-      context.stroke();
-    }
-    if (remainingAttempts <= 0) {
-      // Dibujar pierna izquierda
-      context.beginPath();
-      context.moveTo(125, 80);
-      context.lineTo(110, 100);
+      context.moveTo(10, 130);
+      context.lineTo(140, 130);
       context.stroke();
 
-      // Dibujar pierna derecha
-      context.beginPath();
-      context.moveTo(125, 80);
-      context.lineTo(140, 100);
-      context.stroke();
+      if (remainingAttempts <= 5) {
+        // Dibujar poste
+        context.beginPath();
+        context.moveTo(75, 130);
+        context.lineTo(75, 10);
+        context.lineTo(125, 10);
+        context.lineTo(125, 20);
+        context.stroke();
+      }
+      if (remainingAttempts <= 4) {
+        // Dibujar cabeza
+        context.beginPath();
+        context.arc(125, 30, 10, 0, Math.PI * 2, true);
+        context.stroke();
+      }
+      if (remainingAttempts <= 3) {
+        // Dibujar cuerpo
+        context.beginPath();
+        context.moveTo(125, 40);
+        context.lineTo(125, 80);
+        context.stroke();
+      }
+      if (remainingAttempts <= 2) {
+        // Dibujar brazo izquierdo
+        context.beginPath();
+        context.moveTo(125, 50);
+        context.lineTo(110, 60);
+        context.stroke();
+      }
+      if (remainingAttempts <= 1) {
+        // Dibujar brazo derecho
+        context.beginPath();
+        context.moveTo(125, 50);
+        context.lineTo(140, 60);
+        context.stroke();
+      }
+      if (remainingAttempts <= 0) {
+        // Dibujar pierna izquierda
+        context.beginPath();
+        context.moveTo(125, 80);
+        context.lineTo(110, 100);
+        context.stroke();
+
+        // Dibujar pierna derecha
+        context.beginPath();
+        context.moveTo(125, 80);
+        context.lineTo(140, 100);
+        context.stroke();
+      }
     }
   }, [remainingAttempts]);
 
@@ -197,17 +199,21 @@ function Hangman() {
       <button className="hangman-start" onClick={startGame} type="button">
         Start Game
       </button>
-      {gameStarted && <div id="word">Word: {renderWord()}</div>}
-      {gameOver && <div className="hangman-end">{gameWon ? '¡you win!' : 'Game Over'}</div>}
-      <div className="hangman-error">
-        <canvas ref={canvasRef} width="150" height="150" />
-        <div className="error-info">
-          {gameStarted && (
-            <div className="error-letters">Wrong Leters: {wrongLetters.join(', ')}</div>
-          )}
-          {gameStarted && <div className="hangman-lives">Lives: {remainingAttempts}</div>}
+      {gameStarted && (
+        <div id="word">
+          <p>{renderWord()} </p>
+          <div className="hangman-error">
+            <canvas ref={canvasRef} width="150" height="150" />
+          </div>
         </div>
-      </div>
+      )}
+      {gameStarted && (
+        <div className="error-info">
+          <div className="error-letters">Wrong Leters: {wrongLetters.join(', ')}</div>
+          <div className="hangman-lives">Lives: {remainingAttempts}</div>
+        </div>
+      )}
+      {gameOver && <div className="hangman-end">{gameWon ? '¡you win!' : 'Game Over'}</div>}
       {gameStarted && <div className="alphabet">{renderAlphabetButtons()}</div>}
       <div>
         <button className="togle-music" onClick={toggleMute} type="button">

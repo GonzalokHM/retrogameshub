@@ -7,9 +7,21 @@
   }
 
   #word{
-    background-image: url(../../../assets/hangmanwood.jpg);
+    background-image: url(../../../assets/hangmanWanted.jpg);
     border-radius: 5px;
-    padding: 4rem;
+    background-size: cover;
+    height: 302px;
+    width: 216px;
+    display: flex;
+    padding-bottom: 1.3rem;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  #word p{
+    display: flex;
+    justify-content: center;
+    font-size: 21px;
   }
 
   .error-info{
@@ -38,4 +50,30 @@
     box-shadow: 0 4px 30px var(--box-shadow);
     backdrop-filter: blur(5px);
     border: 1px solid var(--border-color-shadow);
+  }
+
+  .togle-music{
+    background-image: url(../../../assets/hangmanWood.jpg);
+    border-radius: 8px;
+    color: #f0eddb;
+    padding: 0.2rem;
+  }
+
+  .hangman-start{
+    background-image: url(../../../assets/hangmanWood.jpg);
+    border-radius: 8px;
+    color: #f0eddb;
+    padding: 0.5rem;
+  }
+
+  .hangman-end{
+    background-image: url(../../../assets/hangmanExplosion.gif);
+    color: darkred;
+    width: 121px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    position: absolute;
   }

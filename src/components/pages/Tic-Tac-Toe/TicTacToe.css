@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 70vh;
+    height: 96vh;
 }
 
 .game-button{
@@ -16,7 +16,32 @@
 }
 
 .turn{
-    padding: 1rem;
+    padding: 0.5rem;
+    color: black;
+    border-radius: 20px;
+    margin: 12px;
+    background-color: #ff149387;
+    box-shadow: 0 4px 30px var(--box-shadow);
+    backdrop-filter: blur(5px);
+    border: 1px solid var(--border-color-shadow);
+}
+
+.board{
+    padding: 0.5rem;
+    border-radius: 20px;
+    background-color:var(--background-color-shadow);
+    box-shadow: 0 4px 30px var(--box-shadow);
+    backdrop-filter: blur(5px);
+    border: 1px solid var(--border-color-shadow);
+}
+
+.board button{
+    border-radius: 50%;
+    font-size: 35px;
+    text-align: center;
+    color: #26f9fe;
+    border: 2px solid deeppink;
+    background-color: black;
 }
 
 .winner{
