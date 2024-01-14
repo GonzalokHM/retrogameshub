@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import ticTacToeBackground from '../../../assets/ticTacToeBackground.png';
+import XIcon from '../../../assets/ticTacToeX.png';
+import OIcon from '../../../assets/ticTacToeO.png';
 import './TicTacToe.css';
 
 function TicTacToe() {
@@ -78,25 +80,42 @@ function TicTacToe() {
     checkWinner();
   }, [board]);
 
+  const renderCell = (cellValue) => {
+    switch (cellValue) {
+      case 'X':
+        return <img src={XIcon} alt="X" className="tic-tac-toe-icon" />;
+      case 'O':
+        return <img src={OIcon} alt="O" className="tic-tac-toe-icon" />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <div id="TTTContainer">
-      <button onClick={isStarted ? endGame : startGame} type="button" className="game-button">
+      <button
+        onClick={isStarted ? endGame : startGame}
+        type="button"
+        className={`game-button ${isStarted ? 'end' : 'start'}`}
+      >
         {isStarted ? 'End Game' : 'Start Game'}
       </button>
-      <div className="turn">
-        <h3>Player's Turn: {player}</h3>
-      </div>
+      {isStarted && (
+        <div className="turn">
+          <h3>Player&apos;s Turn: {player}</h3>
+        </div>
+      )}
       <div className="board">
         {board.map((row, rowIndex) => (
-          <div key={rowIndex} style={{ display: 'flex', justifyContent: 'center' }}>
+          <div key={rowIndex} className="tic-tac-toe-row">
             {row.map((cell, colIndex) => (
               <button
                 key={`${rowIndex}-${colIndex}`}
                 onClick={() => handleCellClick(rowIndex, colIndex)}
-                style={{ width: '50px', height: '50px', margin: '5px' }}
+                className="tic-tac-toe-cell"
                 type="button"
               >
-                {cell}
+                {renderCell(cell)}
               </button>
             ))}
           </div>

@@ -1,0 +1,69 @@
+.home-container{
+    background-image: url(../../../assets/HomeBackground.png);
+    background-size: cover;
+    background-position: center;
+    min-width: 100%;
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+}
+
+h1{
+    font-family: 'Press Start 2P', cursive;
+    text-rendering: optimizeSpeed;
+    -webkit-text-stroke: 2px #10ebdee3;
+
+    color: transparent; /* Hacer que el texto sea transparente */
+    background-image: url('../../../assets/HomeH1Patron.jpg');
+    background-clip: text; /* Aplicar el fondo solo al área del texto */
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 20px 10px #10ebde;
+
+}
+/* text-shadow: 3px 3px 0px #000; */
+/* animation: shake 0.5s ease infinite; */
+
+.img-links {
+    margin: 10px; /* Agregar margen para separar las imágenes */
+    transition: transform 0.3s, box-shadow 0.3s; /* Transiciones suaves */
+    transform: perspective(400px) rotateY(45deg);
+  }
+  /* Estilo cuando se pasa el ratón */
+.img-links:hover {
+  transform: perspective(1000px) rotateY(0deg);
+  z-index: 1; /* Gira la imagen en el eje Y */
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5); /* Sombra al pasar el ratón */
+}
+
+.img-links img{
+    height: 15vh;
+    /* width: 150px; */
+    /* height: 200px; */
+    cursor: pointer; /* Cambia el cursor al pasar el ratón */
+    margin: 10px; /* Espacio entre las imágenes */
+    
+}
+
+.linksImg-container {
+    display: flex;
+    flex-direction: row; /* Colocar las imágenes en una fila */
+    justify-content: center; /* Centrar las imágenes horizontalmente */
+    align-items: center; /* Centrar las imágenes verticalmente */
+    margin-top: 20px; /* Espacio entre el encabezado y las imágenes */
+  }
+
+
+@keyframes shake {
+    0% {
+      transform: translateX(-2px); /* Desplazamiento a la izquierda */
+    }
+    50% {
+      transform: translateX(2px); /* Desplazamiento a la derecha */
+    }
+    100% {
+      transform: translateX(-2px); /* Volver al inicio */
+    }
+  }

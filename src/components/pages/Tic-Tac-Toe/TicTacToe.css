@@ -8,11 +8,22 @@
 
 .game-button{
     font-size: 30px;
-    background-color: rgb(0, 188, 0);
+    color: white;
     cursor: pointer;
     border-radius: 20px;
     padding: 0.5rem;
     margin-top: -5rem;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.game-button.start {
+    background-color: #4CAF50;
+    box-shadow: 0 0 20px 10px #4CAF50; 
+    }
+
+.game-button.end {
+    background-color: #f44336;
+    box-shadow: 0 0 20px 10px #f44336;
 }
 
 .turn{
@@ -20,7 +31,7 @@
     color: black;
     border-radius: 20px;
     margin: 12px;
-    background-color: #ff149387;
+    background-color: #76fae580;
     box-shadow: 0 4px 30px var(--box-shadow);
     backdrop-filter: blur(5px);
     border: 1px solid var(--border-color-shadow);
@@ -43,6 +54,22 @@
     border: 2px solid deeppink;
     background-color: black;
 }
+.tic-tac-toe-row{
+    display: flex;
+    justify-content: center; 
+}
+
+.tic-tac-toe-cell{
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+}
+
+.tic-tac-toe-icon {
+    width: 100%; 
+    height: 100%;
+    border-radius: 50%
+  }
 
 .winner{
     position: absolute;
