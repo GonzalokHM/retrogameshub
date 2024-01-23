@@ -6,6 +6,8 @@
     height: 96vh;
 }
 
+/* Start/End game button */
+
 .game-button{
     font-size: 30px;
     color: white;
@@ -26,6 +28,8 @@
     box-shadow: 0 0 20px 10px #f44336;
 }
 
+/* turn info */
+
 .turn{
     padding: 0.5rem;
     color: black;
@@ -36,6 +40,8 @@
     backdrop-filter: blur(5px);
     border: 1px solid var(--border-color-shadow);
 }
+
+/* Board */
 
 .board{
     padding: 0.5rem;
@@ -71,15 +77,41 @@
     border-radius: 50%
   }
 
+  /* winer */
+
 .winner{
     position: absolute;
     background-image: url("kaleidoWinner.gif");
     width: 256px;
     height: 256px;
+    text-align: center;
 }
 
 .winner p {
+    font-family: 'Press Start 2P', cursive;
     position: relative;
     top: 114px;
-    left: 92px;
 }
+
+/* off/on music */
+.togle-music{
+    background-color: black;
+    border-radius: 8px;
+    color: #f0eddb;
+    padding: 0.2rem;
+  }
+
+  @media screen and (min-width: 600px){
+    .tic-tac-toe-cell {
+        width: 150px;
+        height: 150px;
+    }
+    .board{
+        width: 500px;
+        height: 500px
+    }
+    .turn{
+        font-size: 20px;
+    }
+  }
+    

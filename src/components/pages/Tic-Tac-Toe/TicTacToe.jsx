@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import ticTacToeBackground from '../../../assets/ticTacToeBackground.png';
 import XIcon from '../../../assets/ticTacToeX.png';
 import OIcon from '../../../assets/ticTacToeO.png';
+import tictactoeMusic from '../../../assets/tictactoeMusic.mp3';
 import './TicTacToe.css';
 
 function TicTacToe() {
@@ -9,6 +10,35 @@ function TicTacToe() {
   const [player, setPlayer] = useState('X');
   const [board, setBoard] = useState(Array(3).fill(Array(3).fill(null)));
   const [winner, setWinner] = useState(null);
+
+  const [isMuted, setIsMuted] = useState(false);
+  const musicRef = useRef(new Audio(tictactoeMusic));
+
+  useEffect(() => {
+    // Configurar música
+    const music = musicRef.current;
+    music.loop = true;
+    music.play();
+
+    return () => {
+      // Limpiar al desmontar
+      music.pause();
+    };
+  }, []);
+
+  useEffect(() => {
+    // Controlar silencio
+    const music = musicRef.current;
+    if (isMuted) {
+      music.pause();
+    } else {
+      music.play();
+    }
+  }, [isMuted]);
+
+  const toggleMute = () => {
+    setIsMuted(!isMuted);
+  };
 
   useEffect(() => {
     // Establecer fondo
@@ -100,7 +130,7 @@ function TicTacToe() {
       >
         {isStarted ? 'End Game' : 'Start Game'}
       </button>
-      {isStarted && (
+      {isStarted && !winner && (
         <div className="turn">
           <h3>Player&apos;s Turn: {player}</h3>
         </div>
@@ -126,6 +156,11 @@ function TicTacToe() {
           <p>Winner: {winner}</p>
         </div>
       )}
+      <div>
+        <button className="togle-music" onClick={toggleMute} type="button">
+          {isMuted ? 'Unmute' : 'Mute'}
+        </button>
+      </div>
     </div>
   );
 }

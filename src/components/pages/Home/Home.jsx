@@ -1,35 +1,63 @@
-import Slider from 'react-slick';
-import hangmanImg from '../../../assets/hangmanBackground.jpg';
-import tictactoeImg from '../../../assets/ticTacToeBackground.png';
-import sudokuImg from '../../../assets/SudokuBackground.png';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css'
+import { useState } from 'react';
+import hangmanImg from '../../../assets/cartucho-hangman.png';
+import tictactoeImg from '../../../assets/cartucho-Tictactoe.png';
+import sudokuImg from '../../../assets/cartucho-sudoku.png';
 import './home.css';
 
-const images = [hangmanImg, tictactoeImg, sudokuImg];
+const images = [
+  {
+    src: hangmanImg,
+    desc: 'Hangman',
+    details: 'descripcion del juego y copiRight',
+    flipped: false
+  },
+  {
+    src: tictactoeImg,
+    desc: 'Tic Tac Toe',
+    details: 'descripcion del juego y copiRight',
+    flipped: false
+  },
+  { src: sudokuImg, desc: 'Sudoku', details: 'descripcion del juego y copiRight', flipped: false }
+];
 
 function Home() {
-  const settings = {
-    centerMode: true,
-    infinite: true,
-    centerPadding: '0',
-    slidesToShow: 3,
-    speed: 500,
-    focusOnSelect: true,
-    variableWidth: true
+  const [carouselImages, setCarouselImages] = useState(images);
+
+  const flipCard = (index) => {
+    const newImages = [...carouselImages];
+    newImages[index].flipped = !newImages[index].flipped;
+    setCarouselImages(newImages);
+  };
+
+  const handleKeyPress = (event, index) => {
+    if (event.key === 'Enter') {
+      flipCard(index);
+    }
   };
 
   return (
     <div className="home-container">
       <h1>welcome Retro Games Hub</h1>
-      <div className="linksImg-container">
-        <Slider {...settings}>
-          {images.map((image, index) => (
-            <div key={index} className="img-links">
-              <img src={image} alt={`game${index}`} />
+      <div className="carousel">
+        {carouselImages.map((image, index) => (
+          <div
+            key={index}
+            className={`card ${image.flipped ? 'flipped' : ''}`}
+            onClick={() => flipCard(index)}
+            onKeyDown={(e) => handleKeyPress(e, index)}
+            role="button"
+            tabIndex={0}
+          >
+            <div className="inner-card">
+              <div className="front">
+                <img src={image.src} alt={`game${index}`} className="game-image" />
+              </div>
+              <div className="back">
+                <p>{image.details}</p>
+              </div>
             </div>
-          ))}
-        </Slider>
+          </div>
+        ))}
       </div>
     </div>
   );

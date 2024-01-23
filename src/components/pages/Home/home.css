@@ -25,45 +25,131 @@ h1{
 }
 /* text-shadow: 3px 3px 0px #000; */
 /* animation: shake 0.5s ease infinite; */
-
-.img-links {
-    margin: 10px; /* Agregar margen para separar las imágenes */
-    transition: transform 0.3s, box-shadow 0.3s; /* Transiciones suaves */
-    transform: perspective(400px) rotateY(45deg);
-  }
-  /* Estilo cuando se pasa el ratón */
-.img-links:hover {
-  transform: perspective(1000px) rotateY(0deg);
-  z-index: 1; /* Gira la imagen en el eje Y */
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5); /* Sombra al pasar el ratón */
+ 
+.carousel {
+  display: flex;
+  justify-content: center;
+  width: 44vh;
+    height: 30vh;
 }
 
-.img-links img{
-    height: 15vh;
-    /* width: 150px; */
-    /* height: 200px; */
-    cursor: pointer; /* Cambia el cursor al pasar el ratón */
-    margin: 10px; /* Espacio entre las imágenes */
-    
+
+.card {
+  cursor: pointer;
+  position: relative;
+  width: 97px;
+  height: 107px;
+  margin: 5px;
+  perspective: 1500px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+/* .card */
+ .inner-card {
+  width: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+.card.flipped .inner-card {
+  transform: rotateY(180deg);
 }
 
-.linksImg-container {
-    display: flex;
-    flex-direction: row; /* Colocar las imágenes en una fila */
-    justify-content: center; /* Centrar las imágenes horizontalmente */
-    align-items: center; /* Centrar las imágenes verticalmente */
-    margin-top: 20px; /* Espacio entre el encabezado y las imágenes */
-  }
+.front{
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.back {
+  transform: rotateY(180deg);
+  background: #828b9f;
+  position: absolute;
+  width: 80%;
+  backface-visibility: hidden;
+  margin-left: 8px;
+  height: 108px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.back p{
+  font-family: 'Press Start 2P', cursive;
+  font-size: 7px;
+}
+
+.front {
+  background: #888;
+  transform: rotateY(0deg);
+}
+
+.front .label {
+  background-color: #000;
+  color: #fff;
+  padding: 5px;
+  width: 90%;
+  text-align: center;
+  position: absolute;
+  top: 10px;
+}
+
+.top-label {
+  font-family: 'Press Start 2P', cursive;
+  color: #4c4c4c;
+  text-shadow: 1px 1px #000; /* Sombra para efecto de grabado */
+  position: absolute;
+  top: 10px;
+  width: 100%;
+  text-align: center;
+}
+
+.game-image {
+  width: 100%;
+  position: absolute;
+  object-fit: cover;
+  left: 0;
+}
 
 
+
+/* Efecto 3D para los lados del cartucho */
+.card:before, .card:after {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 10px;
+  background: linear-gradient(to bottom, #ccc 0%, #999 50%, #ccc 100%);
+  top: 0;
+}
+
+.card:before {
+  left: -10px;
+  transform: rotateY(90deg);
+}
+
+.card:after {
+  right: -10px;
+  transform: rotateY(-90deg);
+}
+
+/* .togle-music{
+  border-radius: 8px;
+  color: #f0eddb;
+  padding: 0.2rem;
+} */
+
+/* 
 @keyframes shake {
     0% {
-      transform: translateX(-2px); /* Desplazamiento a la izquierda */
+      transform: translateX(-2px); 
     }
     50% {
-      transform: translateX(2px); /* Desplazamiento a la derecha */
+      transform: translateX(2px); 
     }
     100% {
-      transform: translateX(-2px); /* Volver al inicio */
+      transform: translateX(-2px); 
     }
-  }
+  }  */
