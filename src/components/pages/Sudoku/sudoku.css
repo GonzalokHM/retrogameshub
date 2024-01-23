@@ -1,0 +1,56 @@
+.sudoku-container{
+    min-height: 92vh;
+    display: flex;
+    /* align-items: center; */
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Board */
+.sudoku-board {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 1px;
+    background-color: rgb(82 215 255 / 10%);
+    box-shadow: 0 4px 30px var(rgba(0, 0, 0, 0.1));
+    backdrop-filter: blur(5px);
+    border: 1px solid var(rgba(255, 255, 255, 0.12));
+  }
+  
+.sudoku-cell-wrapper {
+    width: 40px;
+    height: 40px;
+  }
+  
+.sudoku-cell {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-weight: bold;
+    border: solid 3px;
+    border-radius: 5px;
+
+  }
+
+  /* buttons */
+  .buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.Sbuttons{
+    font-family: 'Press Start 2P';
+    border-radius: 8px;
+    color: #b22063;
+    font-weight: bold;
+    padding: 0.2rem;
+  }
+
+  @media screen and (min-width: 500px){
+    .sudoku-container{
+        min-height: 89vh;
+    }
+  }

@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef  } from 'react';
 import hangmanImg from '../../../assets/cartucho-hangman.png';
 import tictactoeImg from '../../../assets/cartucho-Tictactoe.png';
 import sudokuImg from '../../../assets/cartucho-sudoku.png';
+import homeMusic from '../../../assets/HomeMusic.mp3';
 import './home.css';
 
 const images = [
@@ -35,6 +36,35 @@ function Home() {
     }
   };
 
+  const [isMuted, setIsMuted] = useState(false);
+  const musicRef = useRef(new Audio(homeMusic));
+
+  useEffect(() => {
+    // Configurar música
+    const music = musicRef.current;
+    music.loop = true;
+    music.play();
+
+    return () => {
+      // Limpiar al desmontar
+      music.pause();
+    };
+  }, []);
+
+  useEffect(() => {
+    // Controlar silencio
+    const music = musicRef.current;
+    if (isMuted) {
+      music.pause();
+    } else {
+      music.play();
+    }
+  }, [isMuted]);
+
+  const toggleMute = () => {
+    setIsMuted(!isMuted);
+  };
+
   return (
     <div className="home-container">
       <h1>welcome Retro Games Hub</h1>
@@ -58,6 +88,11 @@ function Home() {
             </div>
           </div>
         ))}
+      </div>
+      <div>
+        <button className="togle-music" onClick={toggleMute} type="button">
+          {isMuted ? '🔇' : '🔊'}
+        </button>
       </div>
     </div>
   );

@@ -33,6 +33,11 @@ function NavBar() {
               Hangman
             </Link>
           </li>
+          <li className={`link ${isActive('/Sudoku') ? 'active' : ''}`}>
+            <Link to="/Sudoku" onClick={closeMenu}>
+              Sudoku
+            </Link>
+          </li>
         </ul>
       </nav>
     </>

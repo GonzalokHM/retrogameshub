@@ -7,6 +7,7 @@ import './App.css';
 
 const TicTacToe = lazy(() => import('./components/pages/Tic-Tac-Toe/TicTacToe'));
 const Hangman = lazy(() => import('./components/pages/Hangman/Hangman'));
+const Sudoku = lazy(() => import('./components/pages/Sudoku/Sudoku'));
 
 function App() {
   return (
@@ -27,6 +28,14 @@ function App() {
           element={
             <React.Suspense fallback={<h2>cargando...</h2>}>
               <Hangman />
+            </React.Suspense>
+          }
+        />
+        <Route
+          path="/Sudoku"
+          element={
+            <React.Suspense fallback={<h2>cargando...</h2>}>
+              <Sudoku />
             </React.Suspense>
           }
         />
