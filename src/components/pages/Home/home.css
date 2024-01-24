@@ -67,7 +67,7 @@ h1{
   width: 80%;
   backface-visibility: hidden;
   margin-left: 8px;
-  height: 108px;
+  height: 97px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -153,3 +153,10 @@ h1{
       transform: translateX(-2px); 
     }
   } 
+
+  @media screen and (min-height: 700px){
+    .back{
+      height: 103px;
+    }
+
+  }

@@ -36,15 +36,14 @@ function Sudoku() {
     );
   };
 
-  useEffect(() => {
-    resetGame();
-  }, []);
-
   const resetGame = () => {
     const newBoard = sudoku.makepuzzle();
     setSudokuBoard(newBoard);
     setGameOver(false);
   };
+  useEffect(() => {
+    resetGame();
+  }, []);
 
   const checkWin = () => {
     if (sudokuBoard.includes(null)) {
@@ -64,7 +63,6 @@ function Sudoku() {
 
   const handleSubmit = () => {
     if (checkWin()) {
-      alert('¡Felicidades! Has completado el Sudoku.');
       setGameOver(true);
     } else {
       alert('Aún no has completado el Sudoku correctamente.');
@@ -131,6 +129,11 @@ function Sudoku() {
           {isMuted ? 'Unmute' : 'Mute'}
         </button>
       </div>
+      {gameOver && (
+        <div className="completion-message">
+          <h2>¡Felicidades! Has completado el Sudoku.</h2>
+        </div>
+      )}
     </div>
   );
 }
