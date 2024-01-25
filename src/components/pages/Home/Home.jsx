@@ -1,109 +1,48 @@
 import { useState, useEffect, useRef } from 'react';
-import hangmanImg from '../../../assets/cartucho-hangman.png';
-import tictactoeImg from '../../../assets/cartucho-Tictactoe.png';
-import sudokuImg from '../../../assets/cartucho-sudoku.png';
 import homeMusic from '../../../assets/HomeMusic.mp3';
+import Card from './cards';
 import './home.css';
 
-const images = [
-  {
-    src: hangmanImg,
-    desc: 'Hangman',
-    details: 'Letter by letter, guess or swing  💀',
-    flipped: false
-  },
-  {
-    src: tictactoeImg,
-    desc: 'Tic Tac Toe',
-    details: "Crosses and noughts, a quick thought's bout",
-    flipped: false
-  },
-  { src: sudokuImg, desc: 'Sudoku', details: 'Numbers align, a puzzle divine', flipped: false }
-];
-
 function Home() {
-  const [carouselImages, setCarouselImages] = useState(images);
-
-  const flipCard = (index) => {
-    const newImages = [...carouselImages];
-    newImages[index].flipped = !newImages[index].flipped;
-    setCarouselImages(newImages);
-  };
-
-  const handleKeyPress = (event, index) => {
-    if (event.key === 'Enter') {
-      flipCard(index);
-    }
-  };
-
-  const [isMuted, setIsMuted] = useState(true);
+  const [isMusicPlaying, setIsMusicPlaying] = useState(false);
   const musicRef = useRef(new Audio(homeMusic));
-  const [hasInteracted, setHasInteracted] = useState(false);
+  const hasInteractedRef = useRef(false);
 
   useEffect(() => {
     // Configurar música
     const music = musicRef.current;
     music.loop = true;
-    if (hasInteracted) {
-      music.play();
+    if (isMusicPlaying) {
+      music.play().catch((e) => console.log('Error al reproducir la música:', e));
+    } else {
+      music.pause();
     }
     return () => {
-      // Limpiar al desmontar
       music.pause();
     };
-  }, [hasInteracted]);
-
-  useEffect(() => {
-    // Controlar silencio
-    const music = musicRef.current;
-    if (isMuted) {
-      music.pause();
-    } else {
-      music.play();
-    }
-  }, [isMuted]);
+  }, [isMusicPlaying]);
 
   const toggleMute = () => {
-    setIsMuted(!isMuted);
+    setIsMusicPlaying(!isMusicPlaying);
   };
 
+  // primera interaccion con cards para reproducir musica
   const handleCardClick = () => {
-    if (!hasInteracted) {
-      setHasInteracted(true);
-      toggleMute();
+    // Verifica si ya ha habido una interacción previa
+    if (!hasInteractedRef.current) {
+      // Si no la ha habido, establece que la música se reproduzca y actualiza la ref
+      setIsMusicPlaying(true);
+      hasInteractedRef.current = true;
     }
   };
 
   return (
     <div className="home-container">
       <h1>welcome Retro Games Hub</h1>
-      <div className="carousel">
-        {carouselImages.map((image, index) => (
-          <div
-            key={index}
-            className={`card ${image.flipped ? 'flipped' : ''}`}
-            onClick={() => {
-              flipCard(index);
-              handleCardClick();
-            }}
-            onKeyDown={(e) => handleKeyPress(e, index)}
-            role="button"
-            tabIndex={0}
-          >
-            <div className="inner-card">
-              <div className="front">
-                <img src={image.src} alt={`game${index}`} className="game-image" />
-              </div>
-              <div className="back">
-                <p>{image.details}</p>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+      <Card onCardClick={handleCardClick} />
       <div>
         <button className="togle-music" onClick={toggleMute} type="button">
-          {isMuted ? '🔇' : '🔊'}
+          {isMusicPlaying ? '🔇' : '🔊'}
         </button>
       </div>
     </div>
