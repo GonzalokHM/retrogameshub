@@ -10,15 +10,18 @@ function Home() {
 
   useEffect(() => {
     // Configurar música
-    const music = musicRef.current;
-    music.loop = true;
-    if (isMusicPlaying) {
-      music.play().catch((e) => console.log('Error al reproducir la música:', e));
-    } else {
-      music.pause();
+    if (musicRef.current) {
+      musicRef.current.loop = true;
+      if (isMusicPlaying) {
+        musicRef.current.play().catch((e) => console.log('Error al reproducir la música:', e));
+      } else {
+        musicRef.current.pause();
+      }
     }
     return () => {
-      music.pause();
+      if (musicRef.current) {
+        musicRef.current.pause();
+      }
     };
   }, [isMusicPlaying]);
 
