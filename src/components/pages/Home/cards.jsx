@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
-import hangmanImg from '../../../assets/cartucho-hangman.png';
-import tictactoeImg from '../../../assets/cartucho-Tictactoe.png';
-import sudokuImg from '../../../assets/cartucho-sudoku.png';
+import hangmanImg from '../../../assets/cartucho-hangman.webp';
+import tictactoeImg from '../../../assets/cartucho-Tictactoe.webp';
+import sudokuImg from '../../../assets/cartucho-sudoku.webp';
 import CardItem from './cardItem';
 
 const images = [

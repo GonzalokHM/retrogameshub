@@ -25,7 +25,7 @@
   }
 
   .error-info{
-    background-image: url(../../../assets/hangmanSoftWood.jpg);
+    background-image: url(../../../assets/hangmanSoftWood.webp);
     border-radius: 5px;
     padding: 1rem;
     color: #660000;
@@ -53,14 +53,14 @@
   }
 
   .togle-music{
-    background-image: url(../../../assets/hangmanWood.jpg);
+    background-image: url(../../../assets/hangmanWood.webp);
     border-radius: 8px;
     color: #f0eddb;
     padding: 0.2rem;
   }
 
   .hangman-start{
-    background-image: url(../../../assets/hangmanWood.jpg);
+    background-image: url(../../../assets/hangmanWood.webp);
     border-radius: 8px;
     color: #f0eddb;
     padding: 0.5rem;

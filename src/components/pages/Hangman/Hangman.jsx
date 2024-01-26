@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import hangmanBackground from '../../../assets/hangmanBackground.jpg';
+import hangmanBackground from '../../../assets/hangmanBackground.webp';
 import hangmanMusic from '../../../assets/hangmanMusic.mp3';
 import './Hangman.css';
 

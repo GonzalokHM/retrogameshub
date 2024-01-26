@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import sudoku from 'sudoku';
-import sudokuBackground from '../../../assets/SudokuBackground.png';
+import sudokuBackground from '../../../assets/SudokuBackground.webp';
 import sudokuMusic from '../../../assets/SudokuMusic.mp3';
 import './sudoku.css';
 

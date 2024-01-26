@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
-import ticTacToeBackground from '../../../assets/ticTacToeBackground.png';
-import XIcon from '../../../assets/ticTacToeX.png';
-import OIcon from '../../../assets/ticTacToeO.png';
+import ticTacToeBackground from '../../../assets/ticTacToeBackground.webp';
+import XIcon from '../../../assets/ticTacToeX.webp';
+import OIcon from '../../../assets/ticTacToeO.webp';
 import tictactoeMusic from '../../../assets/tictactoeMusic.mp3';
 import './TicTacToe.css';
 
