@@ -5,7 +5,7 @@ import './home.css';
 
 function Home() {
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
-  const musicRef = useRef(new Audio(homeMusic));
+  const musicRef = useRef(null);
   const hasInteractedRef = useRef(false);
 
   useEffect(() => {
@@ -30,7 +30,10 @@ function Home() {
   const handleCardClick = () => {
     // Verifica si ya ha habido una interacción previa
     if (!hasInteractedRef.current) {
-      // Si no la ha habido, establece que la música se reproduzca y actualiza la ref
+      // Si no la ha habido y muscRef es null, establece que la música se reproduzca y actualiza la ref
+      if (!musicRef.current) {
+        musicRef.current = new Audio(homeMusic);
+      }
       setIsMusicPlaying(true);
       hasInteractedRef.current = true;
     }
