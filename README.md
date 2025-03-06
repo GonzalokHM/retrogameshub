@@ -21,7 +21,7 @@ Este proyecto incluye tres juegos retro muy conocidos:
 - CSS
 - JavaScript
 - vite
-- 
+- React
 ## Instalación
 
 Si deseas clonar y ejecutar este proyecto en tu máquina local, puedes seguir estos pasos:
